@@ -1,0 +1,48 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+data/*.csv
+data/*.xlsx
+outputs/*.md
+outputs/*.pdf
+.streamlit/secrets.toml
+.pytest_cache/
+
+
+# Virtual Environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# Streamlit
+.streamlit/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+
+# Reports
+reports/*.pdf
+reports/*.docx
+reports/*.html
+
+# Build
+build/
+dist/

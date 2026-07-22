@@ -1,0 +1,193 @@
+/* AI Insight Studio — premium theme
+   Palette: indigo/violet accent on a soft neutral background, generous
+   whitespace, rounded cards with soft shadows, gradient accents used
+   sparingly for emphasis (header banner, primary buttons, badges). */
+
+:root {
+    --ais-accent: #6C5CE7;
+    --ais-accent-dark: #5443c4;
+    --ais-accent-soft: rgba(108, 92, 231, 0.10);
+    --ais-success: #00B894;
+    --ais-warning: #FDCB6E;
+    --ais-danger: #E17055;
+    --ais-text-muted: #6b7280;
+    --ais-border: rgba(17, 24, 39, 0.08);
+    --ais-card-bg: #ffffff;
+    --ais-page-bg: #f7f7fb;
+}
+
+/* App background */
+[data-testid="stAppViewContainer"] {
+    background: var(--ais-page-bg);
+}
+
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: #14122b;
+    color: #f4f3ff;
+}
+[data-testid="stSidebar"] * {
+    color: #f4f3ff !important;
+}
+[data-testid="stSidebar"] hr {
+    border-color: rgba(255,255,255,0.12);
+}
+
+/* Typography */
+html, body, [class*="css"] {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Hero / page header banner */
+.ais-hero {
+    background: linear-gradient(135deg, var(--ais-accent) 0%, #8e7cf0 100%);
+    border-radius: 18px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.6rem;
+    color: #ffffff;
+    box-shadow: 0 10px 30px -12px rgba(108, 92, 231, 0.55);
+}
+.ais-hero .ais-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-bottom: 0.35rem;
+}
+.ais-hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 0.4rem 0;
+    color: #ffffff;
+}
+.ais-hero p {
+    font-size: 1.02rem;
+    opacity: 0.92;
+    margin: 0;
+}
+
+/* Simple page header (non-hero) used on secondary pages */
+.ais-page-header {
+    margin-bottom: 1.2rem;
+}
+.ais-page-header .ais-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ais-accent);
+    margin-bottom: 0.2rem;
+}
+.ais-page-header h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 0.25rem 0;
+}
+.ais-page-header p {
+    color: var(--ais-text-muted);
+    margin: 0;
+}
+
+/* Cards */
+.ais-card {
+    background: var(--ais-card-bg);
+    border: 1px solid var(--ais-border);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+.ais-card-title {
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Stat / metric row */
+.ais-stat-row {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+.ais-stat {
+    flex: 1;
+    min-width: 140px;
+    background: var(--ais-accent-soft);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+}
+.ais-stat-label {
+    font-size: 0.78rem;
+    color: var(--ais-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+}
+.ais-stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+/* Badges */
+.ais-badge {
+    display: inline-block;
+    padding: 0.22rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+.ais-badge-success { background: rgba(0, 184, 148, 0.15); color: #00895f; }
+.ais-badge-danger  { background: rgba(225, 112, 85, 0.15); color: #c0431f; }
+.ais-badge-neutral { background: rgba(108, 92, 231, 0.12); color: var(--ais-accent-dark); }
+
+/* Chat bubbles */
+.ais-chat-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    margin-bottom: 0.6rem;
+    max-width: 88%;
+    line-height: 1.5;
+}
+.ais-chat-user {
+    background: var(--ais-accent);
+    color: #ffffff;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+.ais-chat-assistant {
+    background: #ffffff;
+    border: 1px solid var(--ais-border);
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+}
+
+/* Buttons */
+.stButton > button {
+    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid var(--ais-border);
+}
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, var(--ais-accent) 0%, var(--ais-accent-dark) 100%);
+    border: none;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab"] {
+    font-weight: 600;
+}
+
+/* Dataframe corners */
+[data-testid="stDataFrame"] {
+    border-radius: 12px;
+    overflow: hidden;
+}
