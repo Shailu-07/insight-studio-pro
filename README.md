@@ -1,23 +1,23 @@
 # AI Insight Studio
 
-Upload a dataset, explore it visually, chat with Claude about it in plain
+Upload a dataset, explore it visually, chat with Groq AI about it in plain
 English, and save every dataset, analysis, chat, and report to your own
 MySQL database — all in one polished Streamlit app.
 
 This is a merged, upgraded build: clean layered architecture and a real
-test suite, **plus** full MySQL persistence and Anthropic-powered AI, with
+test suite, **plus** full MySQL persistence and Groq-powered AI, with
 a redesigned, more attractive UI on top.
 
 ## Features
 
 - **Upload Dataset** — CSV/TSV/Excel upload with format, size, and content validation.
 - **Data Preview** — row preview, per-column type/missing-value summary, missing-values chart.
-- **AI Chat** — ask questions about your data in natural language (powered by Claude). Conversations are saved per dataset, so you can pick up where you left off.
+- **AI Chat** — ask questions about your data in natural language (powered by Groq AI). Conversations are saved per dataset, so you can pick up where you left off.
 - **Analysis** — descriptive statistics and a correlation heatmap; save a snapshot to the database.
 - **Visualizations** — histograms, scatter comparisons, and category breakdowns, all user-driven.
 - **Reports** — generate an AI executive summary + trends/anomalies/recommendations, save it, and export as Markdown, PDF, or the cleaned CSV.
 - **History** — every dataset, report, and activity event is stored in MySQL and browsable/reopenable anytime.
-- **Settings** — live MySQL and Anthropic connection status, with a one-click retry.
+- **Settings** — live MySQL and Groq connection status, with a one-click retry.
 - **Automatic MySQL setup** — the database and every table are created automatically on first run.
 - **Real test suite** — `pytest` tests for the data, analytics, and database layers.
 - **Premium UI** — gradient hero header, card-based layout, chat bubbles, and a consistent indigo/violet theme.
@@ -37,30 +37,30 @@ ai_insight_studio/
 │   ├── 6_Reports.py
 │   ├── 7_History.py
 │   └── 8_Settings.py
-├── components/                # Reusable UI building blocks
+├── components/
 │   ├── sidebar.py
 │   └── ui.py
-├── core/                      # Session state + typed exceptions
+├── core/
 │   ├── session.py
 │   └── exceptions.py
-├── services/                  # All business logic — framework-independent
-│   ├── data_service.py         # File parsing/validation
-│   ├── analytics_service.py    # Statistics, correlations, LLM context building
-│   ├── chart_service.py        # Plotly chart construction
-│   ├── llm_service.py          # Anthropic (Claude) integration
-│   └── report_service.py       # Report assembly, persistence, export
-├── db/                        # MySQL persistence layer
-│   ├── engine.py                # Engine/session + automatic DB & table creation
-│   ├── models.py                 # SQLAlchemy ORM models
-│   └── crud.py                   # All database reads/writes
+├── services/
+│   ├── data_service.py
+│   ├── analytics_service.py
+│   ├── chart_service.py
+│   ├── llm_service.py          # Groq AI integration
+│   └── report_service.py
+├── db/
+│   ├── engine.py
+│   ├── models.py
+│   └── crud.py
 ├── config/
-│   └── settings.py             # Environment-based settings (no hardcoded values)
+│   └── settings.py
 ├── utils/
-│   └── helpers.py              # Small framework-independent helpers
-├── tests/                     # pytest suite for services + database layer
+│   └── helpers.py
+├── tests/
 ├── assets/
-│   └── style.css               # The premium theme
-├── .streamlit/config.toml     # Streamlit theme + server config
+│   └── style.css
+├── .streamlit/config.toml
 ├── requirements.txt
 ├── .env.example
 └── .gitignore
@@ -75,7 +75,7 @@ is calculated or stored, edit `services/` or `db/`, not `pages/`.
 
 - Python 3.10+
 - A running MySQL server you have credentials for
-- An Anthropic API key ([console.anthropic.com](https://console.anthropic.com))
+- A Groq API key (https://console.groq.com/keys)
 
 ## Setup
 
@@ -102,15 +102,15 @@ cp .env.example .env            # Windows: copy .env.example .env
 
 Edit `.env`:
 
-```
+```env
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
 MYSQL_PASSWORD=your_mysql_password
 MYSQL_DATABASE=insight_studio
 
-ANTHROPIC_API_KEY=sk-ant-your-key-here
-ANTHROPIC_MODEL=claude-sonnet-5
+GROQ_API_KEY=gsk_your_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
 ```
 
 You do **not** need to manually create the database or any tables — the
@@ -141,7 +141,7 @@ Opens at `http://localhost:8501`.
 5. **Visualizations** — build histograms, scatter plots, and category charts.
 6. **Reports** — generate an AI executive summary + trends/anomalies/recommendations, save it, and export.
 7. **History** — reopen any saved report, browse past uploads, and view the full activity log.
-8. **Settings** — verify your MySQL and Anthropic connections at any time.
+8. **Settings** — verify your MySQL and Groq connections at any time.
 
 ## Configuration Reference
 
@@ -152,10 +152,10 @@ Opens at `http://localhost:8501`.
 | `MYSQL_USER` | MySQL username | `root` |
 | `MYSQL_PASSWORD` | MySQL password | *(empty)* |
 | `MYSQL_DATABASE` | Database name (auto-created) | `insight_studio` |
-| `ANTHROPIC_API_KEY` | Your Anthropic API key | *(required for AI features)* |
-| `ANTHROPIC_MODEL` | Claude model to use | `claude-sonnet-5` |
-| `ANTHROPIC_MAX_TOKENS` | Max tokens per AI response | `1500` |
-| `ANTHROPIC_TIMEOUT_SECONDS` | AI request timeout | `60` |
+| `GROQ_API_KEY` | Your Groq API key | *(required for AI features)* |
+| `GROQ_MODEL` | Groq model to use | `llama-3.3-70b-versatile` |
+| `GROQ_MAX_TOKENS` | Max tokens per AI response | `1500` |
+| `GROQ_TIMEOUT_SECONDS` | AI request timeout | `60` |
 | `MAX_CONTEXT_ROWS` | Rows of your dataset sent to the AI as context | `50` |
 | `APP_NAME` | Display name in the UI | `AI Insight Studio` |
 | `APP_ENV` | `development` or `production` | `development` |
@@ -164,7 +164,7 @@ Opens at `http://localhost:8501`.
 ## Testing
 
 ```bash
-pip install pytest   # already in requirements.txt
+pip install pytest
 pytest tests/ -v
 ```
 
@@ -175,12 +175,12 @@ doesn't require a live MySQL server).
 ## Troubleshooting
 
 - **"Could not connect to MySQL"** — double-check `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`, and `MYSQL_PASSWORD` in `.env`, confirm MySQL is running, then use **Retry connection** on the Settings page.
-- **"ANTHROPIC_API_KEY is not set"** — add your key to `.env` and restart the app (Streamlit doesn't hot-reload `.env` changes).
+- **"GROQ_API_KEY is not set"** — add your key to `.env` and restart the app (Streamlit doesn't hot-reload `.env` changes).
 - **PDF download missing** — install `reportlab` (already in `requirements.txt`).
 - **Large files fail to upload** — increase `MAX_UPLOAD_MB` in `.env` and `server.maxUploadSize` in `.streamlit/config.toml`.
 
 ## Notes
 
 - Only dataset **metadata** (filename, row/column counts, column types) is stored in MySQL — not the raw file contents — so re-running analysis or chat on a past dataset requires re-uploading the original file. Reports and chat history are stored in full.
-- The app degrades gracefully: if MySQL or Anthropic is unreachable, you still get statistical previews and charts locally, with clear inline errors instead of crashes.
+- The app degrades gracefully: if MySQL or Groq is unreachable, you still get statistical previews and charts locally, with clear inline errors instead of crashes.
 - No API keys or credentials are ever hardcoded — everything is read from environment variables via `.env`.
